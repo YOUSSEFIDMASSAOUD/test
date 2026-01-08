@@ -1,0 +1,48 @@
+name: First Pipeline Locale
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: self-hosted 
+    steps:
+      - name: Récupération du code
+        uses: actions/checkout@v4
+
+  test:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - name: Vérification des fichiers HTML/CSS
+        shell: cmd
+        run: |
+          if exist index.html (echo HTML OK) else (exit 1)
+          if exist index.css (echo CSS OK) else (exit 1)
+
+  sonar:
+    runs-on: self-hosted
+    needs: test
+    steps:
+      - name: Récupération du code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+      - name: Analyse SonarQube Locale
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: cmd
+        run: |
+          sonar-scanner ^
+            -Dsonar.projectKey=Devo_test ^
+            -Dsonar.sources=. ^
+            -Dsonar.host.url=http://localhost:9000 ^
+            -Dsonar.login=%SONAR_TOKEN%
+
+  deploy:
+    runs-on: self-hosted
+    needs: sonar
+    steps:
+      - name: Deploiement
+        run: echo "Projet analyse et pret sur ton PC !"
