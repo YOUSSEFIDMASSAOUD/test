@@ -34,7 +34,7 @@ jobs:
         shell: cmd
         run: |
           sonar-scanner ^
-            -Dsonar.projectKey=Devo_test ^
+            -Dsonar.projectKey=test ^
             -Dsonar.sources=. ^
             -Dsonar.host.url=http://localhost:9000 ^
             -Dsonar.login=%SONAR_TOKEN%
