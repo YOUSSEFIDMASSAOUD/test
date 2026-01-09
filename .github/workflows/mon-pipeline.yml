@@ -45,5 +45,5 @@ jobs:
     needs: sonar
     environment: production
     steps:
-      - name: Deploiement
-        run: echo "Projet analyse et pret sur ton PC !"
+      - name: Deploiement reel vers le dossier Web
+        shell: cmd
