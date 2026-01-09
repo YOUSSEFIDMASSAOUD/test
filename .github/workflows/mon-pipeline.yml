@@ -43,8 +43,7 @@ jobs:
   deploy:
     runs-on: self-hosted
     needs: sonar
-    environment: 
-      name: production
+    environment: production
     steps:
       - name: Deploiement
         run: echo "Projet analyse et pret sur ton PC !"
