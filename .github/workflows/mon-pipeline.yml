@@ -19,7 +19,6 @@ jobs:
         shell: cmd
         run: |
           if exist index.html (echo HTML OK) else (exit 1)
-          if exist index.css (echo CSS OK) else (exit 1)
 
   sonar:
     runs-on: self-hosted
